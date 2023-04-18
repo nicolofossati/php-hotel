@@ -54,7 +54,29 @@
         ],
 
     ];
+
+    $parking = '';
+
+    if (!empty($_GET['parking'])) {
+        $parking = $_GET['parking'];
+    }
     ?>
+    <form class="row g-3 justify-content-center my-3" method="get" action="index.php">
+
+        <div class="col-md-4">
+            <label for="inputState" class="form-label text-center d-block">Parking</label>
+            <select id="inputState" class="form-select" name="parking">
+                <option value="yes">YES</option>
+                <option value="no">NO</option>
+            </select>
+        </div>
+        <div class="col-12 d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary col-3 me-2">Search</button>
+            <button type="reset" class="btn btn-primary col-1 ms-2">Reset</button>
+        </div>
+    </form>
+
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -70,15 +92,27 @@
             <?php
 
             foreach ($hotels as $hotel) {
-                ?>
-                <tr>
-                    <?php
-                    foreach ($hotel as $value) {
-                        echo "<td>" . $value . "</td>";
-                    }
+                if (($parking == "yes") && ($hotel['parking'] == true)) {
                     ?>
-                </tr>
-                <?php
+                    <tr>
+                        <?php
+                        foreach ($hotel as $value) {
+                            echo "<td>" . $value . "</td>";
+                        }
+                        ?>
+                    </tr>
+                    <?php
+                } elseif (($parking == "no") && ($hotel['parking'] == false)) {
+                    ?>
+                    <tr>
+                        <?php
+                        foreach ($hotel as $value) {
+                            echo "<td>" . $value . "</td>";
+                        }
+                        ?>
+                    </tr>
+                    <?php
+                }
             }
 
             ?>
