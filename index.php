@@ -57,19 +57,17 @@
 
     $parking = '';
 
-    if (!empty($_GET['parking'])) {
+    if (!isset($_GET['parking'])) {
         $parking = $_GET['parking'];
     }
     ?>
     <form class="row g-3 justify-content-center my-3" method="get" action="index.php">
 
-        <div class="col-md-4">
-            <label for="inputState" class="form-label text-center d-block">Parking</label>
-            <select id="inputState" class="form-select" name="parking">
-                <option value="empty">Choose...</option>
-                <option value="yes">YES</option>
-                <option value="no">NO</option>
-            </select>
+        <div class="col-md-4 d-flex justify-content-center">
+            <div class="form-check form-switch">
+                <label class="form-check-label" for="flexSwitchCheckChecked">Hotel with Parking</label>
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" name="parking">
+            </div>
         </div>
 
         <div class="col-md-12 d-flex justify-content-center">
@@ -102,6 +100,16 @@
 
 
             foreach ($hotels as $hotel) {
+                if (($_GET['parking'] == "on")) {
+                    if ($hotel['parking']) {
+                        $hotels_filtered[] = $hotel;
+                    }
+                } else {
+                    $hotels_filtered = $hotels;
+                }
+            }
+
+            foreach ($hotels_filtered as $hotel_filtered) {
                 ?>
                 <tr>
                     <td>
