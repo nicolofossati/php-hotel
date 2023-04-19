@@ -71,6 +71,13 @@
                 <option value="no">NO</option>
             </select>
         </div>
+
+        <div class="col-md-12 d-flex justify-content-center">
+            <div class="col-md-4">
+                <label for="customRange2" class="form-label text-center d-block">Hotel vote</label>
+                <input type="range" class="form-range" min="0" max="5" id="customRange2">
+            </div>
+        </div>
         <div class="col-12 d-flex justify-content-center">
             <button type="submit" class="btn btn-primary col-3 me-2">Search</button>
             <button type="reset" class="btn btn-primary col-1 ms-2">Reset</button>
@@ -92,47 +99,29 @@
         <tbody>
             <?php
 
+
+
             foreach ($hotels as $hotel) {
                 ?>
                 <tr>
-                    <?php
-                    foreach ($hotel as $value) {
-                        echo "<td>" . $value . "</td>";
-                    }
-                    ?>
+                    <td>
+                        <?php echo $hotel['name'] ?>
+                    </td>
+                    <td>
+                        <?php echo $hotel['description'] ?>
+                    </td>
+                    <td>
+                        <?php echo $hotel['parking'] ?>
+                    </td>
+                    <td>
+                        <?php echo $hotel['vote'] ?>
+                    </td>
+                    <td>
+                        <?php echo $hotel['distance_to_center'] ?>
+                    </td>
+
                 </tr>
                 <?php
-                if ($parking == "empty") {
-                    ?>
-                    <tr>
-                        <?php
-                        foreach ($hotel as $value) {
-                            echo "<td>" . $value . "</td>";
-                        }
-                        ?>
-                    </tr>
-                    <?php
-                } elseif (($parking == "no") && ($hotel['parking'] == false)) {
-                    ?>
-                    <tr>
-                        <?php
-                        foreach ($hotel as $value) {
-                            echo "<td>" . $value . "</td>";
-                        }
-                        ?>
-                    </tr>
-                    <?php
-                } elseif (($parking == "yes") && ($hotel['parking'] == true)) {
-                    ?>
-                    <tr>
-                        <?php
-                        foreach ($hotel as $value) {
-                            echo "<td>" . $value . "</td>";
-                        }
-                        ?>
-                    </tr>
-                    <?php
-                }
             }
 
             ?>
