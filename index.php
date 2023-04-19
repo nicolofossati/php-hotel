@@ -66,6 +66,7 @@
         <div class="col-md-4">
             <label for="inputState" class="form-label text-center d-block">Parking</label>
             <select id="inputState" class="form-select" name="parking">
+                <option value="empty">Choose...</option>
                 <option value="yes">YES</option>
                 <option value="no">NO</option>
             </select>
@@ -92,7 +93,16 @@
             <?php
 
             foreach ($hotels as $hotel) {
-                if (($parking == "yes") && ($hotel['parking'] == true)) {
+                ?>
+                <tr>
+                    <?php
+                    foreach ($hotel as $value) {
+                        echo "<td>" . $value . "</td>";
+                    }
+                    ?>
+                </tr>
+                <?php
+                if ($parking == "empty") {
                     ?>
                     <tr>
                         <?php
@@ -103,6 +113,16 @@
                     </tr>
                     <?php
                 } elseif (($parking == "no") && ($hotel['parking'] == false)) {
+                    ?>
+                    <tr>
+                        <?php
+                        foreach ($hotel as $value) {
+                            echo "<td>" . $value . "</td>";
+                        }
+                        ?>
+                    </tr>
+                    <?php
+                } elseif (($parking == "yes") && ($hotel['parking'] == true)) {
                     ?>
                     <tr>
                         <?php
